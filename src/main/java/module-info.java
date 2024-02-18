@@ -3,6 +3,6 @@ module cz.vse.semestralkaadventurabrad14 {
     requires javafx.fxml;
 
 
-    opens cz.vse.semestralkaadventurabrad14 to javafx.fxml;
-    exports cz.vse.semestralkaadventurabrad14;
+    opens cz.vse.semestralkaadventurabrad14.main to javafx.fxml;
+    exports cz.vse.semestralkaadventurabrad14.main;
 }
