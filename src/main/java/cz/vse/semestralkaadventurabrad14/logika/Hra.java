@@ -14,6 +14,7 @@ public class Hra implements IHra {
     private SeznamPrikazu platnePrikazy;    // obsahuje seznam přípustných příkazů
     private HerniPlan herniPlan;
     private boolean konecHry = false;
+    private boolean chceUkoncit = false;
     private boolean sebranyBatoh = false; // nastavení na false na začátku hry
     private boolean prvniVystraha = false; // slouží pro zaznamenání výstrahy, kterou hráč dostane u dveří při kontrole splnění úkolů matkou
 
@@ -97,8 +98,18 @@ public class Hra implements IHra {
         if (platnePrikazy.jePlatnyPrikaz(slovoPrikazu)) {
             IPrikaz prikaz = platnePrikazy.vratPrikaz(slovoPrikazu);
             textKVypsani = prikaz.provedPrikaz(parametry);
-        }
-        else {
+        } else if (this.chceUkoncit) {
+            if (slovoPrikazu.equals("ano")) {
+                this.setKonecHry(true);
+                return "Hra ukončena příkazem konec";
+            }
+            if (slovoPrikazu.equals("ne")) {
+                return "Hra nebyla ukončena";
+            }
+            else {
+                return "Neplatný příkaz";
+            }
+        } else {
             textKVypsani="Nevím co tím myslíš? Tento příkaz neznám. ";
         }
         return textKVypsani;
@@ -115,6 +126,9 @@ public class Hra implements IHra {
         this.konecHry = konecHry;
     }
 
+    public void setChceUkoncit(boolean chceUkoncit) {
+        this.chceUkoncit = chceUkoncit;
+    }
 
     /**
      * Nastaví, že postava vstala z postele.

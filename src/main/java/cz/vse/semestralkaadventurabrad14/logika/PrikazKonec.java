@@ -46,21 +46,10 @@ class PrikazKonec implements IPrikaz {
      * @return zpráva, která je vypsána hráči
      */
     public String varovaniKonec() {
-        System.out.println("Pozor! Opravdu chceš ukončit hru? Bude ztracen veškerý postup.");
-        System.out.println("Ukončit hru: 'ano' 'ne'");
-        Scanner in = new Scanner(System.in);
-        String volba = in.nextLine().toLowerCase();
-        if (volba.equals("ano")) {
-            hra.setKonecHry(true);
-            return "Hra ukončena příkazem konec";
-        }
-        if (volba.equals("ne")) {
-            return "Hra nebyla ukončena";
-        }
-        else {
-            return "Neplatný příkaz";
-        }
+        hra.setChceUkoncit(true);
+        return "Pozor! Opravdu chceš ukončit hru? Bude ztracen veškerý postup.\n Ukončit hru: 'ano' 'ne'";
     }
+
     /**
      *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
      *  
