@@ -1,5 +1,8 @@
 package cz.vse.semestralkaadventurabrad14.main;
 
+import cz.vse.semestralkaadventurabrad14.logika.Hra;
+import cz.vse.semestralkaadventurabrad14.logika.IHra;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -12,9 +15,22 @@ public class HomeController {
     @FXML
     private TextField vstup;
 
+    private IHra hra = new Hra();
+
+
+
+    @FXML
+    private void initialize() {
+        vystup.appendText(hra.vratUvitani() + "\n\n");
+        Platform.runLater(() -> vstup.requestFocus());
+    }
+
     @FXML
     private void odesliVstup(ActionEvent actionEvent) {
-        vystup.appendText(vstup.getText() + "\n");
+        String prikaz = vstup.getText();
+        vystup.appendText("> " + prikaz + "\n");
+        String vysledek = hra.zpracujPrikaz(prikaz);
+        vystup.appendText(vysledek + "\n\n");
         vstup.clear();
     }
 }

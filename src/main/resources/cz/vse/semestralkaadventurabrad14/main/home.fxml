@@ -25,7 +25,7 @@
           <Button mnemonicParsing="false" text="Button" />
         </items>
       </ToolBar>
-      <TextArea fx:id="vystup" GridPane.rowIndex="1"/>
+      <TextArea fx:id="vystup" editable="false" GridPane.rowIndex="1"/>
 
       <HBox spacing="5.0" GridPane.rowIndex="2">
          <children>
