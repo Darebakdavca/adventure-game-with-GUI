@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cz.vse</groupId>
-    <artifactId>semestralka-adventura-brad14</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>adventura</artifactId>
+    <version>1.0.0</version>
     <name>semestralka-adventura-brad14</name>
 
     <properties>
@@ -61,11 +61,11 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                cz.vse.semestralkaadventurabrad14/cz.vse.semestralkaadventurabrad14.HelloApplication
+                                cz.vse.semestralkaadventurabrad14/cz.vse.semestralkaadventurabrad14.main.Start
                             </mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
+                            <launcher>${project.artifactId}</launcher>
+                            <jlinkZipName>${project.artifactId}-${project.version}</jlinkZipName>
+                            <jlinkImageName>${project.artifactId}</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
