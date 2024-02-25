@@ -1,6 +1,12 @@
 package cz.vse.semestralkaadventurabrad14.logika;
 
 
+import cz.vse.semestralkaadventurabrad14.main.Pozorovatel;
+import cz.vse.semestralkaadventurabrad14.main.PredmetPozorovani;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *  Class HerniPlan - třída představující mapu a stav adventury.
  * 
@@ -10,12 +16,13 @@ package cz.vse.semestralkaadventurabrad14.logika;
  *  a pamatuje si aktuální prostor, ve kterém se hráč právě nachází.
  *
  */
-public class HerniPlan {
+public class HerniPlan implements PredmetPozorovani {
     
     private Prostor aktualniProstor;
     private Batoh batoh;
-    
-     /**
+    private Set<Pozorovatel> seznamPozorovatelu = new HashSet<>();
+
+    /**
      *  Konstruktor který vytváří jednotlivé prostory a propojuje je pomocí východů.
      */
     public HerniPlan() {
@@ -97,5 +104,17 @@ public class HerniPlan {
      */
     public void setAktualniProstor(Prostor prostor) {
        aktualniProstor = prostor;
+       upozorniPozorovatele();
+    }
+
+    @Override
+    public void registruj(Pozorovatel pozorovatel) {
+        seznamPozorovatelu.add(pozorovatel);
+    }
+
+    public void upozorniPozorovatele() {
+        for (Pozorovatel pozorovatel : seznamPozorovatelu) {
+            pozorovatel.aktualizuj();
+        }
     }
 }
