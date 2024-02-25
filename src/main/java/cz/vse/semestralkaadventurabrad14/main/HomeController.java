@@ -2,7 +2,10 @@ package cz.vse.semestralkaadventurabrad14.main;
 
 import cz.vse.semestralkaadventurabrad14.logika.Hra;
 import cz.vse.semestralkaadventurabrad14.logika.IHra;
+import cz.vse.semestralkaadventurabrad14.logika.Prostor;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,10 +18,13 @@ public class HomeController {
     public TextArea vystup;
     @FXML
     public Button tlacitkoOdesli;
+    public ListView panelVychodu;
     @FXML
     private TextField vstup;
 
     private IHra hra = new Hra();
+
+    private ObservableList<Prostor> seznamVychodu= FXCollections.observableArrayList();
 
 
 
@@ -26,6 +32,13 @@ public class HomeController {
     private void initialize() {
         vystup.appendText(hra.vratUvitani() + "\n\n");
         Platform.runLater(() -> vstup.requestFocus());
+        panelVychodu.setItems(seznamVychodu);
+    }
+
+    @FXML
+    private void aktualizujSeznamVychodu() {
+        seznamVychodu.clear();
+        seznamVychodu.addAll(hra.getHerniPlan().getAktualniProstor().getVychody());
     }
 
     @FXML

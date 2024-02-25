@@ -6,7 +6,7 @@
 
     <groupId>cz.vse</groupId>
     <artifactId>adventura</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0-snapshot</version>
     <name>semestralka-adventura-brad14</name>
 
     <properties>

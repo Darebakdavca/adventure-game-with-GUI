@@ -236,4 +236,9 @@ public class Prostor {
         }
         return popis;
     }
+
+    @Override
+    public String toString() {
+        return getNazev();
+    }
 }
