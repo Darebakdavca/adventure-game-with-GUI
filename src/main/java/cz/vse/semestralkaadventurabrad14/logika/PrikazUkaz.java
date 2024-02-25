@@ -96,7 +96,7 @@ public class PrikazUkaz implements IPrikaz {
         postupText.append("- Obout se: ").append(hra.isObulSe() ? "Splněno" : "Nesplněno").append("\n");
 
         // Přidání dodatečného textu o prohlížení sebraných předmětů v batohu
-        postupText.append("\n Sebranné předměty si prohlédni v batohu.");
+        postupText.append("\n Sebranné předměty si prohlédni v batohu pomocí 'ukaž batoh'.");
 
         // Vrácení textového popisu postupu
         return postupText.toString();

@@ -42,21 +42,6 @@ public class PrikazVycistitZuby implements IPrikaz {
             return "Vyčistit si zuby kde? Nechápu, proč jste zadal druhé slovo.";
         }
         else if (herniPlan.getAktualniProstor().getNazev().equals("koupelna")) {
-            System.out.println("Začínáš si čistit zuby...");
-
-            // časovač na 10 vteřin
-            try {
-                for (int i = 0; i < 10; i++) {
-                    // simulace průběhu čištění zubů
-                    Thread.sleep(1000); // 1 vteřina
-
-                    // použití # pro zobrazení postupu
-                    System.out.print("#");
-                    System.out.flush(); // pro okamžité zobrazení výstupu
-                }
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             hra.setVycistilSiZuby(true);
             return "\nZuby jsou čisté! Dobrá práce!";
         }

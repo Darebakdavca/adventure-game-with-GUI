@@ -5,8 +5,8 @@ package cz.vse.semestralkaadventurabrad14.logika;
  *  Tato třída je součástí jednoduché textové hry.
  *
  */
-class PrikazJdi implements IPrikaz {
-    private static final String NAZEV = "jdi";
+public class PrikazJdi implements IPrikaz {
+    public static final String NAZEV = "jdi";
     private HerniPlan herniPlan;
     private Hra hra;
 

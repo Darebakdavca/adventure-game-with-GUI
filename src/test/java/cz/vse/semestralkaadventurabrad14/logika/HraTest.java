@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /*******************************************************************************
  * Testovací třída HraTest slouží ke komplexnímu otestování
@@ -60,20 +61,14 @@ public class HraTest {
         assertEquals("pokojíček", hra1.getHerniPlan().getAktualniProstor().getNazev());
         hra1.zpracujPrikaz("vstát");
         hra1.zpracujPrikaz("jdi chodba");
-        assertEquals(false, hra1.konecHry());
+        assertFalse(hra1.konecHry());
         assertEquals("chodba", hra1.getHerniPlan().getAktualniProstor().getNazev());
         hra1.zpracujPrikaz("jdi koupelna");
-        assertEquals(false, hra1.konecHry());
+        assertFalse(hra1.konecHry());
         assertEquals("koupelna", hra1.getHerniPlan().getAktualniProstor().getNazev());
 
-        // připravení inputu od hráče "ano"
-        String input = "ano";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
         hra1.zpracujPrikaz("konec");
-
-        System.setIn(System.in);
+        hra1.zpracujPrikaz("ano");
 
         assertEquals(true, hra1.konecHry());
     }
