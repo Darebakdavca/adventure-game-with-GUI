@@ -1,5 +1,14 @@
 package cz.vse.semestralkaadventurabrad14.logika;
 
+import cz.vse.semestralkaadventurabrad14.main.Pozorovatel;
+import cz.vse.semestralkaadventurabrad14.main.PredmetPozorovani;
+import cz.vse.semestralkaadventurabrad14.main.ZmenaHry;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 /**
  *  Třída Hra - třída představující logiku adventury.
  * 
@@ -28,6 +37,7 @@ public class Hra implements IHra {
     private boolean vycistilSiZuby = false;
     private boolean obleknulSe = false;
     private boolean obulSe = false;
+    private Map<ZmenaHry, Set<Pozorovatel>> seznamPozorovatelu = new HashMap<>();
 
     /**
      *  Vytváří hru a inicializuje místnosti (prostřednictvím třídy HerniPlan) a seznam platných příkazů.
@@ -52,6 +62,9 @@ public class Hra implements IHra {
         platnePrikazy.vlozPrikaz(new PrikazUkaz(herniPlan,this));
         platnePrikazy.vlozPrikaz(new PrikazPoloz(herniPlan, this));
         platnePrikazy.vlozPrikaz(new PrikazZkontroluj(herniPlan, this));
+        for (ZmenaHry zmenaHry : ZmenaHry.values()) {
+            seznamPozorovatelu.put(zmenaHry, new HashSet<>());
+        }
     }
 
     /**
@@ -69,7 +82,7 @@ public class Hra implements IHra {
      *  Vrátí závěrečnou zprávu pro hráče.
      */
     public String vratEpilog() {
-        return "\n\nDěkuji za zahrání adventury. Ahoj.\n";
+        return "\nDěkuji za zahrání adventury. Důvod:\n\n";
     }
 
     /**
@@ -124,6 +137,7 @@ public class Hra implements IHra {
      */
     void setKonecHry(boolean konecHry) {
         this.konecHry = konecHry;
+        upozorniPozorovatele(ZmenaHry.KONEC_HRY);
     }
 
     public void setChceUkoncit(boolean chceUkoncit) {
@@ -305,5 +319,15 @@ public class Hra implements IHra {
      }
 
 
+    @Override
+    public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
+        seznamPozorovatelu.get(zmenaHry).add(pozorovatel);
+    }
+
+    public void upozorniPozorovatele(ZmenaHry zmenaHry) {
+        for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)) {
+            pozorovatel.aktualizuj();
+        }
+    }
 }
 

@@ -3,8 +3,11 @@ package cz.vse.semestralkaadventurabrad14.logika;
 
 import cz.vse.semestralkaadventurabrad14.main.Pozorovatel;
 import cz.vse.semestralkaadventurabrad14.main.PredmetPozorovani;
+import cz.vse.semestralkaadventurabrad14.main.ZmenaHry;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -20,13 +23,16 @@ public class HerniPlan implements PredmetPozorovani {
     
     private Prostor aktualniProstor;
     private Batoh batoh;
-    private Set<Pozorovatel> seznamPozorovatelu = new HashSet<>();
+    private Map<ZmenaHry, Set<Pozorovatel>> seznamPozorovatelu = new HashMap<>();
 
     /**
      *  Konstruktor který vytváří jednotlivé prostory a propojuje je pomocí východů.
      */
     public HerniPlan() {
         zalozProstoryHry();
+        for (ZmenaHry zmenaHry : ZmenaHry.values()) {
+            seznamPozorovatelu.put(zmenaHry, new HashSet<>());
+        }
     }
     /**
      *  Vytváří jednotlivé prostory a propojuje je pomocí východů.
@@ -104,16 +110,16 @@ public class HerniPlan implements PredmetPozorovani {
      */
     public void setAktualniProstor(Prostor prostor) {
        aktualniProstor = prostor;
-       upozorniPozorovatele();
+       upozorniPozorovatele(ZmenaHry.ZMENA_MISTNOSTI);
     }
 
     @Override
-    public void registruj(Pozorovatel pozorovatel) {
-        seznamPozorovatelu.add(pozorovatel);
+    public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
+        seznamPozorovatelu.get(zmenaHry).add(pozorovatel);
     }
 
-    public void upozorniPozorovatele() {
-        for (Pozorovatel pozorovatel : seznamPozorovatelu) {
+    public void upozorniPozorovatele(ZmenaHry zmenaHry) {
+        for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)) {
             pozorovatel.aktualizuj();
         }
     }

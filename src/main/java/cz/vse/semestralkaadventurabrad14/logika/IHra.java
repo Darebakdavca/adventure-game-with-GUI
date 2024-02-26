@@ -2,11 +2,13 @@
  * Kontrola kódování: Příliš žluťoučký kůň úpěl ďábelské ódy. */
 package cz.vse.semestralkaadventurabrad14.logika;
 
+import cz.vse.semestralkaadventurabrad14.main.PredmetPozorovani;
+
 /**
  *  Rozhraní které musí implementovat hra, je na ně navázáno uživatelské rozhraní
  *
  */
-public interface IHra {
+public interface IHra extends PredmetPozorovani {
     /**
      *  Vrátí úvodní zprávu pro hráče.
      *  
