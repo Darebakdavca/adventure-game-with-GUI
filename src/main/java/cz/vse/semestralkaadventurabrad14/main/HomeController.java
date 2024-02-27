@@ -10,6 +10,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class HomeController {
         hra.registruj(ZmenaHry.KONEC_HRY, () -> aktualizujKonecHry());
         aktualizujSeznamVychodu();
         vlozSouradnice();
+        panelVychodu.setCellFactory(param -> new ListCellProstor());
     }
 
     private void vlozSouradnice() {
@@ -104,7 +106,7 @@ public class HomeController {
     private void klikPanelVychodu(MouseEvent mouseEvent) {
         Prostor cil = panelVychodu.getSelectionModel().getSelectedItem();
         if (cil==null) return;
-        String prikaz = PrikazJdi.NAZEV + " " + cil;
+        String prikaz = PrikazJdi.NAZEV + " " + cil.getNazev();
         zpracujPrikaz(prikaz);
     }
 }
