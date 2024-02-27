@@ -6,9 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class HomeController {
@@ -18,6 +22,7 @@ public class HomeController {
     @FXML
     public Button tlacitkoOdesli;
     public ListView<Prostor> panelVychodu;
+    public ImageView hrac;
     @FXML
     private TextField vstup;
 
@@ -25,20 +30,42 @@ public class HomeController {
 
     private ObservableList<Prostor> seznamVychodu= FXCollections.observableArrayList();
 
+    private Map<String, Point2D> souradniceProstoru = new HashMap<>();
+
     @FXML
     private void initialize() {
         vystup.appendText(hra.vratUvitani() + "\n\n");
         Platform.runLater(() -> vstup.requestFocus());
         panelVychodu.setItems(seznamVychodu);
-        hra.getHerniPlan().registruj(ZmenaHry.ZMENA_MISTNOSTI, () -> aktualizujSeznamVychodu());
+        hra.getHerniPlan().registruj(ZmenaHry.ZMENA_MISTNOSTI, () -> {
+            aktualizujSeznamVychodu();
+            aktualizujPolohuHrace();
+        });
         hra.registruj(ZmenaHry.KONEC_HRY, () -> aktualizujKonecHry());
         aktualizujSeznamVychodu();
+        vlozSouradnice();
+    }
+
+    private void vlozSouradnice() {
+        souradniceProstoru.put("pokojíček", new Point2D(211, 262));
+        souradniceProstoru.put("chodba", new Point2D(205, 163));
+        souradniceProstoru.put("kuchyň", new Point2D(53, 159));
+        souradniceProstoru.put("koupelna", new Point2D(333, 174));
+        souradniceProstoru.put("předsíň", new Point2D(197, 73));
+        souradniceProstoru.put("záchod", new Point2D(301, 23));
+        souradniceProstoru.put("dveře", new Point2D(79, 35));
     }
 
     @FXML
     private void aktualizujSeznamVychodu() {
         seznamVychodu.clear();
         seznamVychodu.addAll(hra.getHerniPlan().getAktualniProstor().getVychody());
+    }
+
+    private void aktualizujPolohuHrace() {
+        String prostor = hra.getHerniPlan().getAktualniProstor().getNazev();
+        hrac.setLayoutX(souradniceProstoru.get(prostor).getX());
+        hrac.setLayoutY(souradniceProstoru.get(prostor).getY());
     }
 
     public void aktualizujKonecHry() {
