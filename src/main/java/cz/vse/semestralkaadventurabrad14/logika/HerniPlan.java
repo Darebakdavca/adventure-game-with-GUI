@@ -44,7 +44,7 @@ public class HerniPlan implements PredmetPozorovani {
         // vytvoření jednotlivých prostorů
         Prostor pokojicek = new Prostor("pokojíček","pokojíček, ve kterém spíš a můžeš se obléknout");
         Prostor chodba = new Prostor("chodba", "chodba, ze které se dá dostat do ostatních částí bytu");
-        Prostor kuchyn = new Prostor("kuchyň","kuchyň, kde se nachází svačina, pití a je zde možnost si vzít léky");
+        Prostor kuchyn = new Prostor("kuchyň","kuchyň, kde se nachází houska, pití a je zde možnost si vzít léky");
         Prostor koupelna = new Prostor("koupelna","koupelna, kde se čistí zuby a češe se");
         Prostor predsin = new Prostor("předsíň","předsíň, ze které se dá dostat ke dveřím a nebo na záchod, jsou zde boty");
         Prostor zachod = new Prostor("záchod", "záchod, kde můžeš vykonat potřebu");

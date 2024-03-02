@@ -38,7 +38,7 @@ class PrikazNapoveda implements IPrikaz {
                 + "- Musíš si dojít na záchod přes chodbu a předsíň, vykonat potřebu. \n"
                 + "- Musíš dojít do kuchyně přes chodbu a vzít si vitamíny. \n"
                 + "- Musíš jít přes chodbu do koupelny a učesat se a vyčistit si zuby. \n"
-                + "- Musíš se jít obléknout do pokojíčku a v přesíni si obout boty. \n"
+                + "- Musíš se jít obléknout do pokojíčku a v předsíni si obout boty. \n"
                 + "- Musíš si vzít batoh a v kuchyni si do něj dát svačinu (houska a pití). Toť vše. \n\n"
                 + "Na konci dojdeš ke dveřím, kde na tebe čeká matka. Matka zkontroluje, že sis \nnezapomněl vzít " +
                 "svačinu a že jsi udělal všechno, co jsi měl.\n\n"
