@@ -26,6 +26,7 @@ public class HomeController {
     @FXML
     public Button tlacitkoOdesli;
     public ListView<Prostor> panelVychodu;
+    public ListView<Predmet> panelBatohu;
     public ImageView hrac;
     @FXML
     private TextField vstup;
@@ -33,6 +34,7 @@ public class HomeController {
     private IHra hra = new Hra();
 
     private ObservableList<Prostor> seznamVychodu= FXCollections.observableArrayList();
+    private ObservableList<Predmet> seznamBatohu = FXCollections.observableArrayList();
 
     private Map<String, Point2D> souradniceProstoru = new HashMap<>();
 
@@ -41,15 +43,20 @@ public class HomeController {
         vystup.appendText(hra.vratUvitani() + "\n\n");
         Platform.runLater(() -> vstup.requestFocus());
         panelVychodu.setItems(seznamVychodu);
+        panelBatohu.setItems(seznamBatohu);
         hra.getHerniPlan().registruj(ZmenaHry.ZMENA_MISTNOSTI, () -> {
             aktualizujSeznamVychodu();
+            Platform.runLater(() -> vstup.requestFocus());
             aktualizujPolohuHrace();
         });
         hra.registruj(ZmenaHry.KONEC_HRY, () -> aktualizujKonecHry());
+        hra.getHerniPlan().getBatoh().registruj(ZmenaHry.ZMENA_BATOHU, () -> aktualizujSeznamBatohu());
         aktualizujSeznamVychodu();
         vlozSouradnice();
         panelVychodu.setCellFactory(param -> new ListCellProstor());
+        panelBatohu.setCellFactory(param -> new ListCellPredmet());
     }
+
 
     private void vlozSouradnice() {
         souradniceProstoru.put("pokojíček", new Point2D(211, 262));
@@ -66,7 +73,11 @@ public class HomeController {
         seznamVychodu.clear();
         seznamVychodu.addAll(hra.getHerniPlan().getAktualniProstor().getVychody());
     }
-
+    @FXML
+    private void aktualizujSeznamBatohu() {
+        seznamBatohu.clear();
+        seznamBatohu.addAll(hra.getHerniPlan().getBatoh().getSeznamPredmetu());
+    }
     private void aktualizujPolohuHrace() {
         String prostor = hra.getHerniPlan().getAktualniProstor().getNazev();
         hrac.setLayoutX(souradniceProstoru.get(prostor).getX());

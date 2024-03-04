@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.semestralkaadventurabrad14.main.HomeController">
   <columnConstraints>
@@ -35,14 +36,14 @@
                   <items>
                       <MenuItem mnemonicParsing="false" onAction="#ukoncitHru" text="Ukončit" />
                       <MenuItem onAction="#napovedaKlik" text="Nápověda" />
-                      <MenuItem  text="Nová hra" />
+                      <MenuItem text="Nová hra" />
                   </items>
               </Menu>
           </menus>
 
       </MenuBar>
 
-      <HBox spacing="5.0" GridPane.rowIndex="3">
+            <HBox spacing="5.0" GridPane.rowIndex="3">
          <children>
             <TextField fx:id="vstup" onAction="#odesliVstup" HBox.hgrow="ALWAYS">
                <padding>
@@ -64,31 +65,44 @@
       </HBox>
       <SplitPane dividerPositions="0.3" GridPane.rowIndex="2">
          <items>
-             <ListView fx:id="panelVychodu" onMouseClicked="#klikPanelVychodu" prefHeight="313.0" prefWidth="212.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <TitledPane animated="false" prefHeight="200.0" prefWidth="279.0" text="Batoh">
+                     <content>
+                        <ListView fx:id="panelBatohu" orientation="HORIZONTAL" prefHeight="57.0" prefWidth="234.0" style="-fx-background-color: #FFFFFF;" />
+                     </content>
+                  </TitledPane>
+                   <ListView fx:id="panelVychodu" onMouseClicked="#klikPanelVychodu" prefHeight="392.0" prefWidth="236.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
              <TextArea fx:id="vystup" editable="false" prefHeight="313.0" prefWidth="219.0" />
          </items>
       </SplitPane>
-      <TitledPane text="Mapa" GridPane.rowIndex="1">
-         <content>
-            <HBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;">
-               <children>
-                  <Pane>
+      <HBox GridPane.halignment="CENTER" GridPane.rowIndex="1">
+         <children>
+            <TitledPane text="Mapa" HBox.hgrow="ALWAYS">
+               <content>
+                  <HBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;">
                      <children>
-                        <ImageView fitHeight="646.0" fitWidth="440.0" layoutX="3.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Prostory/herniPlan.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="hrac" fitHeight="72.0" fitWidth="63.0" layoutX="189.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Prostory/hrac.png" />
-                           </image>
-                        </ImageView>
+                        <Pane>
+                           <children>
+                              <ImageView fitHeight="646.0" fitWidth="440.0" layoutX="3.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Prostory/herniPlan.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="hrac" fitHeight="72.0" fitWidth="63.0" layoutX="189.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Prostory/hrac.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
                      </children>
-                  </Pane>
-               </children>
-            </HBox>
-         </content>
-      </TitledPane>
+                  </HBox>
+               </content>
+            </TitledPane>
+         </children>
+      </HBox>
    </children>
 </GridPane>
