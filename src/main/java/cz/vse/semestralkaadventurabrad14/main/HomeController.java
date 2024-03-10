@@ -54,6 +54,13 @@ public class HomeController {
         vlozSouradnice();
         panelVychodu.setCellFactory(param -> new ListCellProstor());
         panelBatohu.setCellFactory(param -> new ListCellPredmet());
+        panelBatohu.setOnMouseClicked(event -> {
+            Predmet vybranyPredmet = panelBatohu.getSelectionModel().getSelectedItem();
+            if (vybranyPredmet != null) {
+                hra.getHerniPlan().getBatoh().odeberPredmet(vybranyPredmet.getNazev());
+                hra.getHerniPlan().getAktualniProstor().vlozPredmet(vybranyPredmet);
+            }
+        });
     }
 
     private void registrujZmeny() {
