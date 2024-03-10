@@ -43,7 +43,7 @@ public class PrikazVycistitZuby implements IPrikaz {
         }
         else if (herniPlan.getAktualniProstor().getNazev().equals("koupelna")) {
             hra.setVycistilSiZuby(true);
-            return "\nZuby jsou čisté! Dobrá práce!";
+            return "Zuby jsou čisté! Dobrá práce!";
         }
         return "Zde si nemůžeš čistit zuby.";
     }

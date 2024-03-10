@@ -80,7 +80,7 @@
       </SplitPane>
       <HBox GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <children>
-            <TitledPane text="Mapa" HBox.hgrow="ALWAYS">
+            <TitledPane fx:id="mapa" text="Mapa" HBox.hgrow="ALWAYS">
                <content>
                   <HBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;">
                      <children>

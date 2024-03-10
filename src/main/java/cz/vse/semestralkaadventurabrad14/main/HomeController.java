@@ -34,6 +34,8 @@ public class HomeController {
     @FXML
     public ImageView hrac;
     @FXML
+    public TitledPane mapa;
+    @FXML
     private TextField vstup;
 
     private IHra hra = new Hra();
@@ -91,6 +93,11 @@ public class HomeController {
         vystup.appendText(hra.vratUvitani() + "\n\n");
         titledPaneBatoh.setVisible(false);
         titledPaneBatoh.setManaged(false);
+        tlacitkoOdesli.setDisable(false);
+        panelVychodu.setDisable(false);
+        panelBatohu.setDisable(false);
+        vystup.setDisable(false);
+        mapa.setDisable(false);
         registrujZmeny();
         aktualizujSeznamVychodu();
         aktualizujSeznamBatohu();
@@ -155,6 +162,9 @@ public class HomeController {
         vstup.setDisable(hra.konecHry());
         tlacitkoOdesli.setDisable(hra.konecHry());
         panelVychodu.setDisable(hra.konecHry());
+        panelBatohu.setDisable(hra.konecHry());
+        vystup.setDisable(hra.konecHry());
+        mapa.setDisable(hra.konecHry());
     }
 
     /**
