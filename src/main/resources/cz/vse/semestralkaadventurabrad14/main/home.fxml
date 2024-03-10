@@ -36,7 +36,7 @@
                   <items>
                       <MenuItem mnemonicParsing="false" onAction="#ukoncitHru" text="Ukončit" />
                       <MenuItem onAction="#napovedaKlik" text="Nápověda" />
-                      <MenuItem text="Nová hra" />
+                      <MenuItem onAction="#novaHraKlik" text="Nová hra" />
                   </items>
               </Menu>
           </menus>
@@ -67,7 +67,7 @@
          <items>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <TitledPane animated="false" prefHeight="200.0" prefWidth="279.0" text="Batoh">
+                  <TitledPane fx:id="titledPaneBatoh" visible="false" managed="false" animated="false" prefHeight="200.0" prefWidth="279.0" text="Batoh">
                      <content>
                         <ListView fx:id="panelBatohu" orientation="HORIZONTAL" prefHeight="57.0" prefWidth="234.0" style="-fx-background-color: #FFFFFF;" />
                      </content>

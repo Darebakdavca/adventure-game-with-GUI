@@ -25,8 +25,13 @@ public class HomeController {
     public TextArea vystup;
     @FXML
     public Button tlacitkoOdesli;
+    @FXML
     public ListView<Prostor> panelVychodu;
+    @FXML
+    public TitledPane titledPaneBatoh;
+    @FXML
     public ListView<Predmet> panelBatohu;
+    @FXML
     public ImageView hrac;
     @FXML
     private TextField vstup;
@@ -44,6 +49,14 @@ public class HomeController {
         Platform.runLater(() -> vstup.requestFocus());
         panelVychodu.setItems(seznamVychodu);
         panelBatohu.setItems(seznamBatohu);
+        registrujZmeny();
+        aktualizujSeznamVychodu();
+        vlozSouradnice();
+        panelVychodu.setCellFactory(param -> new ListCellProstor());
+        panelBatohu.setCellFactory(param -> new ListCellPredmet());
+    }
+
+    private void registrujZmeny() {
         hra.getHerniPlan().registruj(ZmenaHry.ZMENA_MISTNOSTI, () -> {
             aktualizujSeznamVychodu();
             Platform.runLater(() -> vstup.requestFocus());
@@ -51,12 +64,29 @@ public class HomeController {
         });
         hra.registruj(ZmenaHry.KONEC_HRY, () -> aktualizujKonecHry());
         hra.getHerniPlan().getBatoh().registruj(ZmenaHry.ZMENA_BATOHU, () -> aktualizujSeznamBatohu());
-        aktualizujSeznamVychodu();
-        vlozSouradnice();
-        panelVychodu.setCellFactory(param -> new ListCellProstor());
-        panelBatohu.setCellFactory(param -> new ListCellPredmet());
+        hra.getHerniPlan().getBatoh().registruj(ZmenaHry.ZMENA_SEBRANI_BATOHU, () -> aktualizujSebraniBatohu());
     }
 
+
+    public void novaHraKlik(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Pozor! Opravdu chceš začít novou hru? Bude ztracen veškerý postup.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            vytvorHru();
+        }
+    }
+
+    private void vytvorHru() {
+        hra = new Hra();
+        vystup.clear();
+        vystup.appendText(hra.vratUvitani() + "\n\n");
+        titledPaneBatoh.setVisible(false);
+        titledPaneBatoh.setManaged(false);
+        registrujZmeny();
+        aktualizujSeznamVychodu();
+        aktualizujSeznamBatohu();
+        aktualizujPolohuHrace();
+    }
 
     private void vlozSouradnice() {
         souradniceProstoru.put("pokojíček", new Point2D(211, 262));
@@ -67,7 +97,10 @@ public class HomeController {
         souradniceProstoru.put("záchod", new Point2D(301, 23));
         souradniceProstoru.put("dveře", new Point2D(79, 35));
     }
-
+    private void aktualizujSebraniBatohu() {
+        titledPaneBatoh.setVisible(true);
+        titledPaneBatoh.setManaged(true);
+    }
     @FXML
     private void aktualizujSeznamVychodu() {
         seznamVychodu.clear();
@@ -78,6 +111,8 @@ public class HomeController {
         seznamBatohu.clear();
         seznamBatohu.addAll(hra.getHerniPlan().getBatoh().getSeznamPredmetu());
     }
+
+
     private void aktualizujPolohuHrace() {
         String prostor = hra.getHerniPlan().getAktualniProstor().getNazev();
         hrac.setLayoutX(souradniceProstoru.get(prostor).getX());
@@ -133,6 +168,7 @@ public class HomeController {
         napovedaStage.show();
         wv.getEngine().load(getClass().getResource("napoveda.html").toExternalForm());
     }
+
 
 
 }

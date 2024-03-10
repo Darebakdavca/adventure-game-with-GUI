@@ -39,9 +39,20 @@ public class Start extends Application
         } else {
             launch();
         }
-
     }
 
+    /**
+     *  Je volána, pokud je aplikace spuštěna bez parametru "text" v příkazovém řádku,
+     *  a zahajuje grafické uživatelské rozhraní (GUI) verzi hry.
+     *
+     *  V této metodě se nastavuje a zobrazuje hlavní okno aplikace.
+     *  Inicializuje se {@link FXMLLoader} pro načtení GUI z definovaného souboru FXML,
+     *  vytváří se scéna z načteného kořenového uzlu a nastavuje se na pódium (stage).
+     *  Nakonec se pódium zobrazí uživateli s titulkem "Adventura".
+     *
+     * @param stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();

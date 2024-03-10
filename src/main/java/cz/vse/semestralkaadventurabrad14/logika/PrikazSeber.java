@@ -1,4 +1,7 @@
 package cz.vse.semestralkaadventurabrad14.logika;
+
+import cz.vse.semestralkaadventurabrad14.main.ZmenaHry;
+
 /**
  * Třída PříkazSeber implementuje pro hru příkaz seber.
  * Tato třída je součástí jednoduché textové hry.
@@ -51,6 +54,7 @@ public class PrikazSeber implements IPrikaz {
                         // pokud batoh ještě není sebraný
                     if (!hra.isSebranyBatoh()) {
                         hra.setSebranyBatoh(true);
+                        hra.getHerniPlan().getBatoh().upozorniPozorovatele(ZmenaHry.ZMENA_SEBRANI_BATOHU);
                         return "Sebral jsi batoh, nyní můžeš sbírat ostatní předměty.";
 
                         // batoh je již sebraný
