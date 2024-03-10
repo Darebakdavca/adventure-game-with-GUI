@@ -4,6 +4,10 @@ import cz.vse.semestralkaadventurabrad14.logika.Predmet;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 
+/**
+ * Třída ListCellPredmet představuje grafickou podobu předmětu v seznamu předmětů.
+ * Tato třída je součástí jednoduché textové hry.
+ */
 public class ListCellPredmet extends ListCell<Predmet> {
     @Override
     protected void updateItem(Predmet predmet, boolean empty) {

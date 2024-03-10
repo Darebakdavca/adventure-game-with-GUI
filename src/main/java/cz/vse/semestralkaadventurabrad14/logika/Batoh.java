@@ -85,12 +85,21 @@ public class Batoh implements PredmetPozorovani {
         return seznamPredmetu;
     }
 
-
+    /**
+     * Registrace pozorovatele.
+     * @param zmenaHry
+     * @param pozorovatel
+     */
     @Override
     public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
         seznamPozorovatelu.get(zmenaHry).add(pozorovatel);
     }
 
+    /**
+     * Upozorni pozorovatele z příslušného seznamu.
+     *
+     * @param zmenaHry      změna, které se pozorovatel týká
+     */
     public void upozorniPozorovatele(ZmenaHry zmenaHry) {
         for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)) {
             pozorovatel.aktualizuj();

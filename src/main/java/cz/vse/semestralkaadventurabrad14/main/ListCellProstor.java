@@ -6,6 +6,10 @@ import javafx.scene.image.ImageView;
 
 import java.text.DecimalFormat;
 
+/**
+ * Třída ListCellProstor představuje grafickou podobu prostoru v seznamu prostorů.
+ * Tato třída je součástí jednoduché textové hry.
+ */
 public class ListCellProstor extends ListCell<Prostor> {
     @Override
     protected void updateItem(Prostor prostor, boolean empty) {
