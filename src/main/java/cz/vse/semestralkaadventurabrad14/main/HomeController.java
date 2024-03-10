@@ -68,13 +68,6 @@ public class HomeController {
     }
 
 
-    public void novaHraKlik(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Pozor! Opravdu chceš začít novou hru? Bude ztracen veškerý postup.");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            vytvorHru();
-        }
-    }
 
     private void vytvorHru() {
         hra = new Hra();
@@ -149,8 +142,6 @@ public class HomeController {
         }
     }
 
-
-
     @FXML
     private void klikPanelVychodu(MouseEvent mouseEvent) {
         Prostor cil = panelVychodu.getSelectionModel().getSelectedItem();
@@ -169,7 +160,13 @@ public class HomeController {
         wv.getEngine().load(getClass().getResource("napoveda.html").toExternalForm());
     }
 
-
-
+    @FXML
+    private void novaHraKlik(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Pozor! Opravdu chceš začít novou hru? Bude ztracen veškerý postup.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            vytvorHru();
+        }
+    }
 }
 
