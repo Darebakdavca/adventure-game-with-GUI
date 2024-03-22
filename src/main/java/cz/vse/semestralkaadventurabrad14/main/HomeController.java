@@ -97,6 +97,7 @@ public class HomeController {
         panelVychodu.setDisable(false);
         panelBatohu.setDisable(false);
         vystup.setDisable(false);
+        vstup.setDisable(false);
         mapa.setDisable(false);
         registrujZmeny();
         aktualizujSeznamVychodu();
